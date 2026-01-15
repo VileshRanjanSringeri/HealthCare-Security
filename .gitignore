@@ -1,0 +1,13 @@
+# Node modules
+node_modules/
+
+# Environment files
+.env
+
+# Build folders
+dist/
+build/
+
+# VS Code settings
+.vscode/
+HealthCare-Security.zip
