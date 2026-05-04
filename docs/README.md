@@ -18,14 +18,12 @@ This project is a full-stack healthcare security system designed to protect sens
 
 ## Screenshots
 
-### Login & Authentication
-![Login](assets/login.png)
-
 ### Patient Dashboard
 ![Dashboard](assets/dashboard.png)
 
 ### Security Analytics
 ![Security](assets/security-analytics.png)
 
-### Alerts System
-![Alerts](assets/alerts.png)
+### Features
+![Login](assets/features.png)
+
