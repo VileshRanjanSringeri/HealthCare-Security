@@ -1,0 +1,953 @@
+{
+  "metadata": {
+    "system": "Healthcare Data Security Monitoring System",
+    "version": "1.0",
+    "encryption_standard": "Hybrid AES-256-GCM + RSA-2048",
+    "integrity_check": "HMAC-SHA256",
+    "generated_at": "2026-01-29T17:29:07.086978",
+    "total_records": 20,
+    "hmac_secret_key_id": "a6133d48f335ce87"
+  },
+  "patients": [
+    {
+      "record_id": 1,
+      "patient_data": {
+        "patient_id": 1,
+        "vitals": {
+          "heart_rate": 60.0,
+          "respiratory_rate": 12.0,
+          "body_temperature": 36.86,
+          "oxygen_saturation": 95.7,
+          "systolic_bp": 124,
+          "diastolic_bp": 86
+        },
+        "demographics": {
+          "age": 37,
+          "gender": "Female",
+          "weight_kg": 91.54,
+          "height_m": 1.68,
+          "bmi": 32.46
+        },
+        "risk_assessment": {
+          "category": "High Risk",
+          "hrv": 0.121,
+          "pulse_pressure": 38,
+          "mean_arterial_pressure": 98.67
+        },
+        "timestamp": "53:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "deb81bd4ebe79dfb180a8b2e2ea662545ea01d1356342327ff73d9d31579415f",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "DD4icPzmrzZxSbzD",
+          "auth_tag": "QrjtCpzam6lyjeGxw+CUvw=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "POFHzBcGz3E3evbf3VqFxzrFHZN8mqMdyuBvDiXcPy74uyvxwRW9T7EcxijPXMrbbwhrVKNe8qltPUar6hSn3KOgDK6n/q/vTvziVAee6/5cXsntX7yRy+QG1oPnGNjRARnpKSA9PBkIvNYESkreTRepLZ8JjLePFjKJHqpYWt3pSaPysDb+3N3VrfJmFOkxIwyjEi4D/kq1iq6+DtV2DD6O6ndQxxyjvefEPkdPzQvLJ9u2tFXMkYf28X51In1JOPXPApRGpGcAoOEakG/GkifoXEdGH5M/+9JglPSCr3Hv05bsv4czI/VcIhBCbSCmjI6+nqRCbBS3zph8ZHUa4w==",
+          "public_key_hash": "67935a179f55783c48372aefe7b0fa4c283adf23c2420c57b1d3a39725110bbb"
+        },
+        "data_hash": "3f53f7e56965f9173acc2515cf065415dcf82b78a38e1d384d1956c13522209f",
+        "protected_at": "2026-01-29T17:29:07.088025"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 2,
+      "patient_data": {
+        "patient_id": 2,
+        "vitals": {
+          "heart_rate": 63.0,
+          "respiratory_rate": 18.0,
+          "body_temperature": 36.51,
+          "oxygen_saturation": 96.69,
+          "systolic_bp": 126,
+          "diastolic_bp": 84
+        },
+        "demographics": {
+          "age": 77,
+          "gender": "Male",
+          "weight_kg": 50.7,
+          "height_m": 1.99,
+          "bmi": 12.77
+        },
+        "risk_assessment": {
+          "category": "High Risk",
+          "hrv": 0.117,
+          "pulse_pressure": 42,
+          "mean_arterial_pressure": 98.0
+        },
+        "timestamp": "52:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "db58339848c28ffe079bf940566f6ece22bebe98e0c5970ea99caa285157e1ee",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "AdP8tgcAIJhuBmZQ",
+          "auth_tag": "DcACz3TBQhhDK5C5kjyaxQ=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "f0RCFZp7ookElk97XW3AwGlycnq31bnPimwA9niiTxoVFJtZ+JCP+qD0W+V9h2yWrezDqdPyYyy8Hh0/z8Dnb+84238c2PFnBX+a8bHoAxTzMMA5IiJnr0QUw1vLRgHbSNZABpqjp3wsdFGY4tHUl3ty2Z8dUp+aDb5G5YokwoQc3YgnCAvQIfbIUChuB2p9J7+liETk9bln12hgvW41v/eDVeW2c+BxD+fz86Ha7FFwC+K4nViDJx56NdtjgTXuCBsn1DWdIzaQhq0bUTxzj2K5azU3s1LYyV8dr3iKo0eZVB3og+9oyEyTsLq2I0+/9MXtSfuWCAhRfGHVTuKPZA==",
+          "public_key_hash": "f458e47ed4713afa54d7499325e7938a4f235cfe5413f88fb4117764dfc46af7"
+        },
+        "data_hash": "e842efa9a846dc12c6a1af06a7eae02f6ac5ff2958af01944d8660b42a34c7b0",
+        "protected_at": "2026-01-29T17:29:07.088433"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 3,
+      "patient_data": {
+        "patient_id": 3,
+        "vitals": {
+          "heart_rate": 63.0,
+          "respiratory_rate": 15.0,
+          "body_temperature": 37.05,
+          "oxygen_saturation": 98.51,
+          "systolic_bp": 131,
+          "diastolic_bp": 78
+        },
+        "demographics": {
+          "age": 68,
+          "gender": "Female",
+          "weight_kg": 90.32,
+          "height_m": 1.77,
+          "bmi": 28.82
+        },
+        "risk_assessment": {
+          "category": "Low Risk",
+          "hrv": 0.053,
+          "pulse_pressure": 53,
+          "mean_arterial_pressure": 95.67
+        },
+        "timestamp": "51:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "9ddb1c0f5d0d9fa5afe43b8c9a19a5c5e6bfeabe8a6353c036bfc518ecfd01a5",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "ZnAfhmXQ69Ci5RJ9",
+          "auth_tag": "WuWIpERuRGcymqfm74oWIg=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "NATWfrB4vzHkGWy1xXecEbridlz/7CBvnjqphx3ePpvWjqN3q2zjQ0UZZMkwcx1UKoDc89PFgWPHiLZeeYN3UrodcYxIE9wB2ikUO+RhJRs4AH24VRsA0PNmaqInjTsrFB0MmfcU96aB+i542VGOGrohyVKcc2+DzLB4uaNNZZ8Q+2grV4+QKLi8LYSNNEjtZMeV2NbMcWr39N7UYiPSkJZi+Munb9fCkom6m+GDFYycWytQnNlZGzCK2M3/1pQl1QgYnJWmM2wYH+fgj7H7LZuHKkzFQ9qpjyz2cO0YbkiRnT0PscxIBIEe4auafXvwTrva48w0rYpdesKVSwwcDQ==",
+          "public_key_hash": "da58d38647d5d44f256b62788d089296259cc6466e2f0b42ca2e719c6d7a9618"
+        },
+        "data_hash": "40e454a26907ad6cee74b97a0e3408638d27d403ffcf11c859797bb764037005",
+        "protected_at": "2026-01-29T17:29:07.088772"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 4,
+      "patient_data": {
+        "patient_id": 4,
+        "vitals": {
+          "heart_rate": 99.0,
+          "respiratory_rate": 16.0,
+          "body_temperature": 36.65,
+          "oxygen_saturation": 95.01,
+          "systolic_bp": 118,
+          "diastolic_bp": 72
+        },
+        "demographics": {
+          "age": 41,
+          "gender": "Female",
+          "weight_kg": 96.01,
+          "height_m": 1.83,
+          "bmi": 28.55
+        },
+        "risk_assessment": {
+          "category": "High Risk",
+          "hrv": 0.064,
+          "pulse_pressure": 46,
+          "mean_arterial_pressure": 87.33
+        },
+        "timestamp": "50:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "010b0740edf8c4e003fe332659d664b07763d17d911d3e360f9e846fa2635825",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "wsJqGRRemWCk2BYl",
+          "auth_tag": "KWp5jXpRuu97+W+y6A0K6w=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "M9ewyMLsFrwGkBmrwgaRfFft7KDk6aGAPZQ/RJvLvmmswjrDXJXlaxbq92NQhlQ072weWdR1gheisS/vj7GBxsrXaZsM2PKJyEr5+uAAK1/ogJJIp92CQ53xOVIaZSYJtB3/pMB2iH8WxbksEqrlPMvj4WS86tum5xGfGysRm7SAbZKYFQI5zo2dYSPyyuQlrkdQoIGa0sX5vzzbVz95OdwjqmznEMKGHMak8Zg30Ouxgmjhw4dJNcFhMKVylRZAxTRcwiWBWuAu13LX//p1jFjgn5bpblsx2obJ0R170stb23NLDoo7vvAh518WASuHMiF5N8gXDeFVedyh3MmrCA==",
+          "public_key_hash": "881f69fd3e3cce313e44ef1b9999b13c4f107d9e240b211dac206ef62806dc2f"
+        },
+        "data_hash": "2d5df70399e9a054e56d15de36081726401f0f5fad239f09008f6d08a8f5db36",
+        "protected_at": "2026-01-29T17:29:07.089038"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 5,
+      "patient_data": {
+        "patient_id": 5,
+        "vitals": {
+          "heart_rate": 69.0,
+          "respiratory_rate": 16.0,
+          "body_temperature": 36.98,
+          "oxygen_saturation": 98.62,
+          "systolic_bp": 138,
+          "diastolic_bp": 76
+        },
+        "demographics": {
+          "age": 25,
+          "gender": "Female",
+          "weight_kg": 56.02,
+          "height_m": 1.87,
+          "bmi": 16.08
+        },
+        "risk_assessment": {
+          "category": "High Risk",
+          "hrv": 0.118,
+          "pulse_pressure": 62,
+          "mean_arterial_pressure": 96.67
+        },
+        "timestamp": "49:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "46aafc13857f64e95f15e839edb2a9041052c87374c802b4ee3e8154c41654fe",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "cKPcdkfqgBKUBueD",
+          "auth_tag": "i5JcXmvt1nPHhauHUuqdAA=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "g50RYrE67znlC61NgYkeQ2fFPQz9CCKRSGdRSHbGIldAQQIosjB2YWwDT8mKiSwLtOOmJ/UD4wqpCWm10T12fow3E4thPc7DPuRt2LEiPkXYMQ+aIT79LsNJ7UblEmTckvSAHqSU1FcCe1DNzmTx4Yjb07ClRrE4X37SIltGDa89e9usC45OOHi+06j7jgt7DhA95RKSupcG0ZlanvPKl0ZwBaLeYyTo7MNwqaydKtCZb/T0STkUU8pXidR6ONJiV552PcBMsC2UDUdYQcZvoelZ7yjprGB469Wp+JyatRpqt4nmV/8JqUHiVsIUo7vaouDDgseGI5QY9OiP6F1lJg==",
+          "public_key_hash": "03ce06478a9919a6a1d5291132c6ce8b945cdd23959a3d2b75bf75331f3a2ccd"
+        },
+        "data_hash": "7b9f10628b8c4035ac4ecce159fac9feed742f65bb940e35b488e460398c880f",
+        "protected_at": "2026-01-29T17:29:07.089330"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 6,
+      "patient_data": {
+        "patient_id": 6,
+        "vitals": {
+          "heart_rate": 79.0,
+          "respiratory_rate": 12.0,
+          "body_temperature": 36.88,
+          "oxygen_saturation": 95.99,
+          "systolic_bp": 130,
+          "diastolic_bp": 70
+        },
+        "demographics": {
+          "age": 22,
+          "gender": "Male",
+          "weight_kg": 79.87,
+          "height_m": 1.92,
+          "bmi": 21.61
+        },
+        "risk_assessment": {
+          "category": "Low Risk",
+          "hrv": 0.104,
+          "pulse_pressure": 60,
+          "mean_arterial_pressure": 90.0
+        },
+        "timestamp": "48:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "2650cb6297a44b8ae4f9315ff73e6b0ac001aa88445bbe6f379e2ec5894902f6",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "SE58XZbnVdCcWmxD",
+          "auth_tag": "RuTjeg4Kl3ypgfksAyI44g=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "O6YFqUXppig/Hmjy1vc10bOqKZ6ApLyXZA5jIRuYTpUq3HnFBVatpu4UkxdM4sqeJvBYmwtM71TJ3hWlR1bcVm8/gZqb/AWqDEmehIHx5yIl5JPwrm33+VNhqtDvjvLhZ+G3IT9lNIgi4Gosp+T6W34OusW/gFNaYOFpaN6zWVSZdRSli79bi0d0LKmr2OMdimr000jzKmU6vGWIbimdwE4YtHx0eDnZXg5uOo8VbZXDbM4mfBBRLZ7p+fgK1dOrddSdCZijAeZR7oRy4sPpgPpFdbZbJraZRo8nGFuG55qNMJxBjvmpCVO4FVf77ceyRiujk8tQWviHKyDg4ZV55g==",
+          "public_key_hash": "3dc57e5c2a283090b9d7b6278e6889609c6aa620c9e3a684db078f67a2db1912"
+        },
+        "data_hash": "94588ed7712eff1c70e96f6210e4b01ed92800733f5783327a0826818938238d",
+        "protected_at": "2026-01-29T17:29:07.089552"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 7,
+      "patient_data": {
+        "patient_id": 7,
+        "vitals": {
+          "heart_rate": 81.0,
+          "respiratory_rate": 17.0,
+          "body_temperature": 37.27,
+          "oxygen_saturation": 99.46,
+          "systolic_bp": 118,
+          "diastolic_bp": 84
+        },
+        "demographics": {
+          "age": 43,
+          "gender": "Male",
+          "weight_kg": 57.85,
+          "height_m": 1.83,
+          "bmi": 17.25
+        },
+        "risk_assessment": {
+          "category": "High Risk",
+          "hrv": 0.056,
+          "pulse_pressure": 34,
+          "mean_arterial_pressure": 95.33
+        },
+        "timestamp": "47:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "d31e6bd4ec7e71ca8b73d5628d3a5373ce82cdfe2f434315b0db2ccd95f69902",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "W82IQ5LvbPCfCBky",
+          "auth_tag": "HfZTF4des2THn291cOW4Lg=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "zr3w1wtaUcPKSOcWImvDwSnVyCaGhlrdLgshXEe4xCUhbnakAeXGcypCnNZzyghkO4HZFdq6J97sIh/34id503U1pGzuIXJq0H01ugT2ZzwSUlbmxaegDIkaeTCLbKIeBIwAH0dV1eDPvtv7WdKliKVTB2JiNoUJFr8OHMVXzXLEu3mLKkTjXoWqu+nSDME5B/v4bFYrXkw5Lp7e+3GfOhVxKCuzYcYCHgrYFLUXTR+ix9wtJgzSVYT/GDRF2fpwtKzW5+ZEAQmDSwgoYKqZaCGvKmen3FST7reQZaQs8jMD7MwgwjQfrp+Z4x89YuZgph7v+gbxDYJ10Xq92jXCNQ==",
+          "public_key_hash": "fd61129b09f9969dc7b59c6f8f12a6f3969adc8804b86c908f6728a243bbb8b0"
+        },
+        "data_hash": "7f5daa706c70382d2b8528923ab0ca5eaee35988fb1d336fb25f579561eb37bb",
+        "protected_at": "2026-01-29T17:29:07.089755"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 8,
+      "patient_data": {
+        "patient_id": 8,
+        "vitals": {
+          "heart_rate": 96.0,
+          "respiratory_rate": 15.0,
+          "body_temperature": 36.85,
+          "oxygen_saturation": 97.12,
+          "systolic_bp": 135,
+          "diastolic_bp": 77
+        },
+        "demographics": {
+          "age": 72,
+          "gender": "Female",
+          "weight_kg": 71.76,
+          "height_m": 1.6,
+          "bmi": 27.9
+        },
+        "risk_assessment": {
+          "category": "High Risk",
+          "hrv": 0.073,
+          "pulse_pressure": 58,
+          "mean_arterial_pressure": 96.33
+        },
+        "timestamp": "46:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "81c45f78f4913a4607c279ddac5fd6d7fe1a60e2b320b30d4868c165d1a8b49f",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "jtNBsJMGTeFIdoWi",
+          "auth_tag": "BXonuicFtZUSpRrioVMZww=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "aZtbFId+19y5MIhDcNm9exk5q8aTObhQ6ltmaiOJ+uCwDITZ7a42il2ysa/dFik6+UxDDqxg5czWhLIAjIsMuwvdtE60XkH1VVo7gjYCoFpJUeVRvtzQx/oKibSjVP9jIOX5g+zWtIUjhGMNCRXCfPLBqRTDm8wtEL5VGAi8+4hQbarI5G8lrBflZC34a1op3+rg1bAUC6W8qn/EdCljet9L/N7P6Tf42gt/KIimpaQGMmYtblt5MpoB9C4mZqe25+9d6mDilhi0MnJO3cZRvtEJz8Jvm1UUbGhd3SmVpTrFY+ajMBtsDXO9LohyvaiBfJ2m8oKltB4IuZ1ocd5vVg==",
+          "public_key_hash": "dee5651d49a00431e3675ac47b469241bfad8c9f24a6aaeb0fca241d5c913719"
+        },
+        "data_hash": "ffd0940946beff3e615c5e53ddd98fdb82b03fb43ea716dcf8dfec2e7f8e31d6",
+        "protected_at": "2026-01-29T17:29:07.089958"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 9,
+      "patient_data": {
+        "patient_id": 9,
+        "vitals": {
+          "heart_rate": 83.0,
+          "respiratory_rate": 12.0,
+          "body_temperature": 36.04,
+          "oxygen_saturation": 98.58,
+          "systolic_bp": 111,
+          "diastolic_bp": 84
+        },
+        "demographics": {
+          "age": 50,
+          "gender": "Male",
+          "weight_kg": 79.3,
+          "height_m": 1.67,
+          "bmi": 28.34
+        },
+        "risk_assessment": {
+          "category": "Low Risk",
+          "hrv": 0.099,
+          "pulse_pressure": 27,
+          "mean_arterial_pressure": 93.0
+        },
+        "timestamp": "45:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "19433ea6b3506318b9d7798162f8aceea2936d990e1a12b2fc22e4d2c57f57ed",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "q8HR85vzQEHOq7d+",
+          "auth_tag": "LVTheyhX8bYxqGRJObPFZQ=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "ka340ukFyyHHnwwQ2vhz9yMSWK8q2ZzIF9zialVqZW7h86JqM5IrRwLAD2XkBeBevgvcimqWDcampXkNPijjOv6PQli4/jY1rDlQo25H9tVJnbYwEuN4FJK+BQ5+PWio8ByqZLcT0R8IB+eQ/IKtRzLu6DM9rL4n8G+4r/mo+0ycIksD7RRo7p0F5mKpYL3dLbxqckH07QaYDug8/EpfXEVGaZJr9iECOqbfm34RnOlNPPL/pdReSFW1XEYjeBbJVcfE1JNOOsZt4FkMrTghhUFzfJbLjnVRiCWkIWYk5zvsUpZG3QFbc9HqXn+7yW+cf4CSTn/2Z5ryCfumFsc0Cw==",
+          "public_key_hash": "03479bb131fe4f66f20a41afadaa2492a8ca4d08dcba56030380d1e328393a2f"
+        },
+        "data_hash": "5aa9d05eb820136c9aaa2a510a69183b17addb5f38946855c77228238495cced",
+        "protected_at": "2026-01-29T17:29:07.090180"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 10,
+      "patient_data": {
+        "patient_id": 10,
+        "vitals": {
+          "heart_rate": 66.0,
+          "respiratory_rate": 15.0,
+          "body_temperature": 36.96,
+          "oxygen_saturation": 97.92,
+          "systolic_bp": 131,
+          "diastolic_bp": 77
+        },
+        "demographics": {
+          "age": 61,
+          "gender": "Male",
+          "weight_kg": 53.92,
+          "height_m": 1.9,
+          "bmi": 14.99
+        },
+        "risk_assessment": {
+          "category": "High Risk",
+          "hrv": 0.081,
+          "pulse_pressure": 54,
+          "mean_arterial_pressure": 95.0
+        },
+        "timestamp": "44:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "227c4841d602b51e9846597b437a306876b07850321f452487291b358b486f68",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "jPVUaJN11O051ZLW",
+          "auth_tag": "5HljM5QgFJSebZObr4c3Yg=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "LMoC6DtBJdMTCVF660+2p6p/2gUZxU5M+WmPMtm5kgPcdAZD2MNjaL4WKzIpju6DjStb/NOipP0iBPo1xei2sb4wHH1trQM4A7ear5p+HifHoK8LG4PtC6PUWGq9TtZ8JW5AC9qjNePVHhY14HBhU4zev0lmgVPoR7vHudFoSl96d5udzAci1rv5eOX4cEtEej0OJY3a5FSrw68gNujmSXkD10NBttLOV82FmLXfzV7Y8o/3AHYzlFxxl/Lw13EOhx2Gv99f3N5oVCbpnUwMkvLc17Og5KMZhhZgmla7VFfzLD9MCcDLBBPZGKxqHaOgLxXbDKd8y38ygL33oltkkQ==",
+          "public_key_hash": "fdfc93aea4fd11710cdfebd9ee0ebaa2785c60a46dbc1960d83858620e73caf3"
+        },
+        "data_hash": "2ef62c20bd81996638b0bc19890b159cdbf8f1f091385392e0c4b95f9239c4c3",
+        "protected_at": "2026-01-29T17:29:07.090428"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 11,
+      "patient_data": {
+        "patient_id": 11,
+        "vitals": {
+          "heart_rate": 84.0,
+          "respiratory_rate": 16.0,
+          "body_temperature": 36.28,
+          "oxygen_saturation": 98.2,
+          "systolic_bp": 119,
+          "diastolic_bp": 84
+        },
+        "demographics": {
+          "age": 35,
+          "gender": "Female",
+          "weight_kg": 71.89,
+          "height_m": 1.97,
+          "bmi": 18.53
+        },
+        "risk_assessment": {
+          "category": "Low Risk",
+          "hrv": 0.078,
+          "pulse_pressure": 35,
+          "mean_arterial_pressure": 95.67
+        },
+        "timestamp": "43:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "527290f8a30068381ce37c7df9f4f5f07111acb8b2e8dae080cf6eb9a36efd9c",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "rwasq5rOuCda1kci",
+          "auth_tag": "r+KDL801RpuGjysitI6+/g=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "mxa6ajKuRw0yELC28unj5OGL+EaXCjSkJWxW8BmeXfNo32KZq3DPfxktHNXteQau0Uq1As/8j5Ci/SJTJMYR5W5AV0Ko3utK98tLj/CNI2LbR0HwSQC+UhIseIt7/ECEzgb+YClfU5hglqgjxMEQYSnoBRzdiDG8v5bE5I7QtOP+uni4UBsOfc+Kss/94htmaQ0ZQ2lvpfEjN0QCq9irt99I+izZdZ9mSBu6jc41kT3tjLlRRuJa3WWshq18sIXm6/T1B8CJ2mMnHU/4POrQbh2xFXeXIKyjk5Jymgt08QyFEXBWLpxfR7lVH0B1+hJfgM1BVmeaNdFUoAdheMIyOg==",
+          "public_key_hash": "3006ec43911e137905ca54de82cec8e9e300f465fa0d8daf68028da30e057b55"
+        },
+        "data_hash": "c1d55466097f07935ceaf8e7bdfc784ef6694c2c82ee06da3091c62eacd1ca49",
+        "protected_at": "2026-01-29T17:29:07.090681"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 12,
+      "patient_data": {
+        "patient_id": 12,
+        "vitals": {
+          "heart_rate": 84.0,
+          "respiratory_rate": 12.0,
+          "body_temperature": 36.53,
+          "oxygen_saturation": 98.0,
+          "systolic_bp": 137,
+          "diastolic_bp": 83
+        },
+        "demographics": {
+          "age": 78,
+          "gender": "Female",
+          "weight_kg": 99.31,
+          "height_m": 1.82,
+          "bmi": 29.9
+        },
+        "risk_assessment": {
+          "category": "Low Risk",
+          "hrv": 0.102,
+          "pulse_pressure": 54,
+          "mean_arterial_pressure": 101.0
+        },
+        "timestamp": "42:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "00bf39b101c5635c33f10c11286bb7106aca81ec4b1db8a51bd9f97b996a22f9",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "EDECCvCvk6k10qAe",
+          "auth_tag": "1JMr5sU3A9VQOAB/7AS6SA=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "uPF8nO4SBc8e7P5hzDebTx1DOzF/816BAfq/kCNwsjwM+FlMo9KoiuEldJoH1UgiA6AuBQhb1+rm5OnwX9zPu8CGN29FAXmSX3btaEHkPd2PGqpUgVfJ31W4qNLUHSU2Y6bYX/Y2yimdrwgLaI0kUqulrtrI4C86lFbYcCft3/7jgbe7nrub+XUZm+8b17vjzOIRMhTfGkBv5ZKqQ60/AEa8vtIytMlAj1od/jh8592rB9GtJ7NcG0kUdv5Uf3Hq+q6ULsgTiRFv5PJn+UbxF7r7Gxjn+7vi8JUUkQSBHbhJkTEp7WmEUYAsSj9j7QoIcBOp8vKeYmJdDroIVsCX6Q==",
+          "public_key_hash": "f2bc75d305480e2f59f30ec9b27ea60f4d23b157b13d60b1bfe6bace6cdac86c"
+        },
+        "data_hash": "1426b85bbe977f85ce3fd3f9f04d1cb284f0ef48861362eaab6640bd4713c0d7",
+        "protected_at": "2026-01-29T17:29:07.090870"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 13,
+      "patient_data": {
+        "patient_id": 13,
+        "vitals": {
+          "heart_rate": 72.0,
+          "respiratory_rate": 16.0,
+          "body_temperature": 37.24,
+          "oxygen_saturation": 96.59,
+          "systolic_bp": 112,
+          "diastolic_bp": 76
+        },
+        "demographics": {
+          "age": 31,
+          "gender": "Female",
+          "weight_kg": 50.87,
+          "height_m": 1.88,
+          "bmi": 14.33
+        },
+        "risk_assessment": {
+          "category": "High Risk",
+          "hrv": 0.149,
+          "pulse_pressure": 36,
+          "mean_arterial_pressure": 88.0
+        },
+        "timestamp": "41:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "808d94188f259e7378b6f15e13632bb5c67aa4a6e66f0aa1af1b705fdd9cadbc",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "7usDULSdw/qqNSFy",
+          "auth_tag": "dWNEgtNzLObH9ffhRy1pKg=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "yYVghCbjtTXQlUv1aEAGtPlKBBsB6I+iu5FBwq1EQZ13IYo/oBosZe+aXN+uiP8AJUrikhlDXb9EqdgWikaQSYJcfSOYD3KfsdaxqMO5FpfCEJJufx3N+B3BeeYnA3GdyFvu3x20gRy5lkeVLh5Gg+JHaagkioZEC3d5zNBJc4WEdPY6dQJ07G88GVxsGHxXOfazVdF0qXw05nWtTqMwM9V0VpfsZNqwmPqdBWpHXx++Nf0RQPtd7ZXQ43WBonlNMBCc+kHwdJrnG6ME7RCAvl0hUvRiXSUR9WI8cW9U/Hekgo+Pl3me+9dkUdK9mGBq2+CTM0TL3uOAJ+a3gAvnIw==",
+          "public_key_hash": "8f3f9a048b2221b1ca5aedcbefdefff7c0583d4baf71087ceb20d1ae0ef39220"
+        },
+        "data_hash": "b07213db622c74ee5b519ff41333b7b0ae00fe582ebe7e88b01596b16e545e0c",
+        "protected_at": "2026-01-29T17:29:07.091037"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 14,
+      "patient_data": {
+        "patient_id": 14,
+        "vitals": {
+          "heart_rate": 61.0,
+          "respiratory_rate": 13.0,
+          "body_temperature": 36.51,
+          "oxygen_saturation": 96.53,
+          "systolic_bp": 112,
+          "diastolic_bp": 80
+        },
+        "demographics": {
+          "age": 45,
+          "gender": "Female",
+          "weight_kg": 82.23,
+          "height_m": 1.55,
+          "bmi": 34.05
+        },
+        "risk_assessment": {
+          "category": "High Risk",
+          "hrv": 0.111,
+          "pulse_pressure": 32,
+          "mean_arterial_pressure": 90.67
+        },
+        "timestamp": "40:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "c359e1acb9cea56cfb5f106f3e9a318f634c65242d3cfb234b04e99cc0a6e45a",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "Qk2Y4xv0oCv9N/uq",
+          "auth_tag": "QiJlLnl/nquyjrSWJ21c7A=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "g+EZzDT8jo3cr4c9Haj9JqGU00P6VeChUOw4OO1g+8txCGDXVtSsUPBKUH+Dqga71jSkSxVnBAntXb1T9s+0lQ7lT+XDIH8pcpyH05H8DP/2yGCTZV04M2jnwol0JnCK/5CbIJQ+doVp2Qvo8LQEduUf/JW7I/FiQIDWG0YeBos2Mfjw0VZTPDE4w23PSSj+/NU7V6c0WWDYPYuH0rdwivYQy9rBM2Ppp+wQfopeaR65Kl6S19t7XbQuI0KGdST7z5kxIxl3z3xDkMGEOpPYmNKuZ4vxStO2N6F3wrx8H+H/slSy9U2AgBrXJ0TtJKaF4BHj7nwvBG/3LNm+tliWMw==",
+          "public_key_hash": "097c17ac17d4222085ebbb72c1c5df0931c3985704c02212b439cbbeeb870b39"
+        },
+        "data_hash": "6b0f7d85402190070d387928c103af5a98b400e5a1f71087e912cb474af2605f",
+        "protected_at": "2026-01-29T17:29:07.091193"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 15,
+      "patient_data": {
+        "patient_id": 15,
+        "vitals": {
+          "heart_rate": 98.0,
+          "respiratory_rate": 12.0,
+          "body_temperature": 37.26,
+          "oxygen_saturation": 98.67,
+          "systolic_bp": 127,
+          "diastolic_bp": 87
+        },
+        "demographics": {
+          "age": 89,
+          "gender": "Female",
+          "weight_kg": 97.43,
+          "height_m": 1.9,
+          "bmi": 26.96
+        },
+        "risk_assessment": {
+          "category": "High Risk",
+          "hrv": 0.138,
+          "pulse_pressure": 40,
+          "mean_arterial_pressure": 100.33
+        },
+        "timestamp": "39:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "c474b43252e33f8c533e669fcbc2766ef83dd1928d0e888b3f6496116625c69c",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "LDQhzf6/BG7xFaBv",
+          "auth_tag": "/xWwfbvhxiKntzTOEicHDg=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "ONibJyQ9STgIAQm4DCm1c6nj0z6kbw+I4qT3J0eBV6q4tp9Nsenv24+trJ4So0gK6yFhBmirhQaIX1tW7gFeVR5ZQgee2KBNZ1ieBHvJTu3OnGcTqAler5oilRevaF1OpA/hH33BJ8NMjvq6Ler2OHTFTm4evCCyuGW5I1kfwn53n9UidSjFwFm3qDrHRwjxIue8+69VPQhmXsDu0lK1JjrBVkukN2ejpisIUhuUM/16mfm1ai8U8IjTf2aoV65Ir6ZnbDw0gmKCMomD4pNkGSnJfY/uW8et9nPo6nuJ8Erw1WYvLRjEbNNwFKJtS10Miw9hXLydEU6NQa+/X3ctKw==",
+          "public_key_hash": "d445cc625c2832bf98ce634706f8de94aa5937669c332bd292bae660d078c8eb"
+        },
+        "data_hash": "d65d0cb9ed24a00fdc9ca39650bfcacbdb87c00c3221ffd7be7c682b13cae017",
+        "protected_at": "2026-01-29T17:29:07.091382"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 16,
+      "patient_data": {
+        "patient_id": 16,
+        "vitals": {
+          "heart_rate": 99.0,
+          "respiratory_rate": 14.0,
+          "body_temperature": 36.92,
+          "oxygen_saturation": 100.0,
+          "systolic_bp": 121,
+          "diastolic_bp": 74
+        },
+        "demographics": {
+          "age": 79,
+          "gender": "Male",
+          "weight_kg": 60.62,
+          "height_m": 1.97,
+          "bmi": 15.63
+        },
+        "risk_assessment": {
+          "category": "High Risk",
+          "hrv": 0.067,
+          "pulse_pressure": 47,
+          "mean_arterial_pressure": 89.67
+        },
+        "timestamp": "38:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "6a5922632d5db1b5819de762e12597fc9485c89297f470be39adb799a8b980e4",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "4w6Cp4frredp7pv/",
+          "auth_tag": "GD4WyOYLFDubrrYBsxGHtg=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "SKIAVbirqK6X00yddXjhwcvSdKS1hejLzpQmC9oHzfIPhKB5gc7a/b7GTD8ec0ZSy85rpXUf9JfGxWAGl4eUE5oP+6sjt8pB+FjXJ/9xGXcV6jxdyV9DnRbfnO2eCY2Hsx69ipdYmGCaKq31xHBIM+PT+ASEiKw2Yf/lWvXB/eHOz9xRUuWS4KQmO+OefDRgyELeBVy+Z/SRm5DQ7pk30UeadwpWRlkcjPmU3p59w+KzcvCtOh8i0XnuX0zJJIK93EVsLMn+ohIGEczsmfAYzZlQKXKsO/sPoDq64QwcUUgts0WODpUFJFzub9D5eOXS1mb75IRKDlAwm0xJd+otGQ==",
+          "public_key_hash": "4f6bef787b5fdfdd024430ed29bd96106998669c64010d9b8ab31b0b2cfb6094"
+        },
+        "data_hash": "97a5bfcf450b86bf74c65977d64f8e5f90592aa965458f8d81743ec5f11716b7",
+        "protected_at": "2026-01-29T17:29:07.091574"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 17,
+      "patient_data": {
+        "patient_id": 17,
+        "vitals": {
+          "heart_rate": 83.0,
+          "respiratory_rate": 15.0,
+          "body_temperature": 37.22,
+          "oxygen_saturation": 96.07,
+          "systolic_bp": 113,
+          "diastolic_bp": 86
+        },
+        "demographics": {
+          "age": 23,
+          "gender": "Male",
+          "weight_kg": 75.21,
+          "height_m": 1.65,
+          "bmi": 27.73
+        },
+        "risk_assessment": {
+          "category": "Low Risk",
+          "hrv": 0.061,
+          "pulse_pressure": 27,
+          "mean_arterial_pressure": 95.0
+        },
+        "timestamp": "37:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "a32a6b52792e3983f6a6472a8b66453f4c632c754b049b1a188c27985791d63a",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "OagfdtF2yUGX6d3I",
+          "auth_tag": "+f3ELrRYNoX5JHACe1NrqQ=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "LYVRH8gATYKmbefuX/DnYWDuPiYsnt5LwXZGtKshd/UTy4HKmDS2HsYaD+RNTURi7zgao5Pu8UDSvIHU/FyvrUOxJDSoziy9KI9yUL084JQ5JaFlvFy9k/jnTkwfeo2x9coQIGX2FE8yNW8hcOUUVxvhxy50ZzBUi3IoWZs6HpYqEMRccNvU6Fs1ixphQysCf/V1IF7GkYAMxnFWN7mGEUQZKHy0O4bybU3kBGPUFqBCdRRpAypwMLZUGow8iC9X4fG8qWQAjkrhXFyNdqDEa42Li9UkFhc2xSs0tFUuOEMtrA09JUHSZg72sUqNXxN44SXYowk6pjMis0OLZq9o0w==",
+          "public_key_hash": "8d527b6462e2256508a636fe072f343bad71b2232bebdc26d66c6c09e794fa48"
+        },
+        "data_hash": "4dc81f393259d76a0d0e9f0a31f31888fe92940b975a2ae4f8781c6131cae18f",
+        "protected_at": "2026-01-29T17:29:07.091719"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 18,
+      "patient_data": {
+        "patient_id": 18,
+        "vitals": {
+          "heart_rate": 84.0,
+          "respiratory_rate": 16.0,
+          "body_temperature": 36.15,
+          "oxygen_saturation": 97.58,
+          "systolic_bp": 127,
+          "diastolic_bp": 89
+        },
+        "demographics": {
+          "age": 62,
+          "gender": "Female",
+          "weight_kg": 74.62,
+          "height_m": 1.66,
+          "bmi": 26.94
+        },
+        "risk_assessment": {
+          "category": "Low Risk",
+          "hrv": 0.117,
+          "pulse_pressure": 38,
+          "mean_arterial_pressure": 101.67
+        },
+        "timestamp": "36:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "81755436e016b11c05e05670051298587f2874a1dc458f79152fde3e90e3f758",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "MCnroJNqwEDMXFGg",
+          "auth_tag": "lPRQS0+boSO5o55pkXA96A=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "6AD5ij7N1omqhSHduTdZNdsPp9yv5eyDLOHfCPjC/wDc+cM3PGyFKZIhSR0idXyP5f7uStkNkoua7nMGtzHPnSRL8B+SmElOkQW/qBWIqiI7eebRTSDdMxDMXXh0NtTvjng4PRPUKFXxNYW3mhAAm95jDpBTpFMf52tqyAttXFYgl1pPv2mI2TTwLrdoj9bwuH9uLItlt3MPhf/wwIvm+NEhfo5emdt3dx2oxX3FsVlCvdYTIuRiUXLpEscVr1moxKU9QL6pmO0+ye7ajhnMcT1BMED13qGlQBXejPxME2w74JoM2PtJA5tea07LceSfPvvSosX0LFFKkI4G5M92yA==",
+          "public_key_hash": "417cfb2b93255f79a035f7ff5c380d40a32760ed4f549afd31c0de53b229ca3d"
+        },
+        "data_hash": "99f6c5cfe16d331eb378b4c9f83cf62c992f2b2b0fb009450020e5d01c10ccef",
+        "protected_at": "2026-01-29T17:29:07.091841"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 19,
+      "patient_data": {
+        "patient_id": 19,
+        "vitals": {
+          "heart_rate": 77.0,
+          "respiratory_rate": 17.0,
+          "body_temperature": 36.81,
+          "oxygen_saturation": 96.24,
+          "systolic_bp": 137,
+          "diastolic_bp": 73
+        },
+        "demographics": {
+          "age": 57,
+          "gender": "Female",
+          "weight_kg": 58.5,
+          "height_m": 1.77,
+          "bmi": 18.58
+        },
+        "risk_assessment": {
+          "category": "Low Risk",
+          "hrv": 0.058,
+          "pulse_pressure": 64,
+          "mean_arterial_pressure": 94.33
+        },
+        "timestamp": "35:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "d68e1fd827db697633a7aae1ba597fe08690034209aed988c49b3b1b18e96dc8",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "Ew/dWbUBISFZz3wH",
+          "auth_tag": "fqmVLH7mI6WwWDN4o/PhRg=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "j2JStIj7cHf03+1pVdN+CA/QC4aSxrYdhdyiXK3vJ7UeY4GBDK/dq/12Py1mnHBYe7qKp1iour73iwC/XPGnFh7RS09/rBjVl4kOt+5S28RADwTQtXsS2KxaieZy9To1igVQHIC1tc9CD2rmUyHwjxtYGLl1Iwu2vHMhHATCwKX3rUDVVUtrgncJAVL+bZx8Gj+Nj/zczOo/zgt/DlHq0PSmgDbMTDx+nn/LMbdQuWJEQRtsQZP4XOyE+5eFJsTQLcjiJO0OTkiWAes+ziiJMDOeJTTM8O6Ggw8A/iie/4xTlrgOxiTuwIYQN+WYX8/wt9b4ptU6wkqZ8ahhpYy+Rg==",
+          "public_key_hash": "2e6bf6cb09d51899f43b727dbb06361ca7985d74c55f344b159740f27a43c226"
+        },
+        "data_hash": "64eff4de11b31cd63f1077b25d7539f77b663c60271199ad8bd20788a6286dc1",
+        "protected_at": "2026-01-29T17:29:07.091986"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    },
+    {
+      "record_id": 20,
+      "patient_data": {
+        "patient_id": 20,
+        "vitals": {
+          "heart_rate": 97.0,
+          "respiratory_rate": 18.0,
+          "body_temperature": 37.47,
+          "oxygen_saturation": 98.04,
+          "systolic_bp": 129,
+          "diastolic_bp": 87
+        },
+        "demographics": {
+          "age": 84,
+          "gender": "Female",
+          "weight_kg": 77.76,
+          "height_m": 1.9,
+          "bmi": 21.46
+        },
+        "risk_assessment": {
+          "category": "High Risk",
+          "hrv": 0.052,
+          "pulse_pressure": 42,
+          "mean_arterial_pressure": 101.0
+        },
+        "timestamp": "34:45.7"
+      },
+      "cryptographic_protection": {
+        "hmac_signature": "689bd5517e0fa9518d3fb3d54dd51debce5d038644aa6470b1df1641a3186a85",
+        "hmac_algorithm": "HMAC-SHA256",
+        "encryption_metadata": {
+          "algorithm": "AES-256-GCM",
+          "key_derivation": "PBKDF2-SHA256",
+          "iterations": 100000,
+          "iv": "p2v+fRQF/Tt/vowW",
+          "auth_tag": "J7YaeaxYqdyHvL8kciTNrQ=="
+        },
+        "rsa_signature": {
+          "algorithm": "RSA-2048-SHA256",
+          "signature": "jxp3zGKK6dZSkCuyaczjTX6E6nyhSa1wgYRwXxg0lv6HMSJP+SDgyCj6mvnXwTQ88HIg2IoAsCvoHrQ8PoT5PaHlDzXfjKHQ4Vp5n7+S3EUKnEa0eOQbPY4tHtuXcqkawRK+1lk1pQXF2An+PkSaYTj9L0zUl7p4nTCQ0eScbkQiD8k1AIRDvT2SBzMLdodRRK/oQt9TXxcTWCTWLBX0kBzUbTPsFrdxFvQN7XNmT/fwFe6sFyUtGfNeADExe2HzPvQiIeaBVXhlXnsVQDVHycn4Gxs4uKDLERJkKxUVjnFniMlpxQ9UOlbsnpq5zRgJ3cBH8b20b29m4O7mhanDkQ==",
+          "public_key_hash": "028b2488bfe79b9c359bc10f647ca75b5b93fcedb568a498b44655b97c59b752"
+        },
+        "data_hash": "d5fd7c95103d35dd1fb6b3443257feb1e42ef2104eae78fb48fd6958722e917f",
+        "protected_at": "2026-01-29T17:29:07.092120"
+      },
+      "verification_status": "SIGNED_AND_ENCRYPTED"
+    }
+  ]
+}

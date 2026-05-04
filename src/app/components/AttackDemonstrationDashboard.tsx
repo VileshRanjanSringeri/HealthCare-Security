@@ -479,9 +479,8 @@ export default function AttackDemonstrationDashboard({ onBack }: AttackDemonstra
             <div>
               <h3 className="font-bold text-[#1E1E1E] mb-1">Real-Time Protection Demonstration</h3>
               <p className="text-sm text-[#717182]">
-                This visualization shows how the Healthcare Data Security system detects and blocks attacks in real-time. 
+                This visualization shows how the HealthCare-Security system detects and blocks attacks in real-time. 
                 The combination of cryptographic verification (HMAC-SHA256), hybrid encryption (AES-256 + RSA-2048), 
-                and AI-powered anomaly detection (LSTM model) provides multiple layers of defense against cyber threats.
               </p>
             </div>
           </div>

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Heart, Activity, TrendingUp, TrendingDown, Shield, Lock, CheckCircle, Clock, User, FileText, AlertTriangle, ChevronDown, ChevronUp, Calendar, Stethoscope, Droplet } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, AreaChart, Area } from 'recharts';
-import { generateVitalSignsHistory } from '../data/mockData';
-import { Alert, Patient } from '../App';
+import { ArrowLeft, Heart, Thermometer, Activity, Droplets, AlertTriangle, CheckCircle, Shield, Lock, Eye, EyeOff, User, Calendar, Stethoscope, FileText, Droplet, Clock, ChevronUp, ChevronDown } from 'lucide-react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
+import { Patient, Alert } from '../App';
+import { generateVitalSignsHistory, generateBloodPressureHistory } from '../data/mockData';
+import { formatTime12Hour, formatDate } from '../utils/timeFormat';
 
 interface PatientDetailViewProps {
   patient: Patient;
@@ -18,6 +19,7 @@ export default function PatientDetailView({ patient, patientId, onBack, onShowAl
     heartRate: generateVitalSignsHistory(72, 10, 24),
     oxygen: generateVitalSignsHistory(98, 3, 24),
     glucose: generateVitalSignsHistory(105, 15, 24),
+    bloodPressure: generateBloodPressureHistory(120, 80, 10, 24),
   });
   const [ecgData, setEcgData] = useState(generateVitalSignsHistory(72, 30, 50));
 
@@ -33,6 +35,7 @@ export default function PatientDetailView({ patient, patientId, onBack, onShowAl
           heartRate: generateVitalSignsHistory(patient.vitalSigns.heartRate, 10, 24),
           oxygen: generateVitalSignsHistory(patient.vitalSigns.oxygen, 3, 24),
           glucose: generateVitalSignsHistory(patient.vitalSigns.glucose, 15, 24),
+          bloodPressure: generateBloodPressureHistory(patient.vitalSigns.bloodPressure, 10, 24),
         });
         setEcgData(generateVitalSignsHistory(patient.vitalSigns.heartRate, 30, 50));
       }
@@ -83,8 +86,8 @@ export default function PatientDetailView({ patient, patientId, onBack, onShowAl
             </div>
             <div className="flex items-center gap-4">
               <div className="text-right px-4 py-2 rounded-lg bg-[#F6F5F4]">
-                <p className="text-xs text-[#717182]">{currentTime.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
-                <p className="text-sm font-semibold font-mono">{currentTime.toLocaleTimeString()}</p>
+                <p className="text-xs text-[#717182]">{formatDate(currentTime)}</p>
+                <p className="text-sm font-semibold font-mono">{formatTime12Hour(currentTime)}</p>
               </div>
             </div>
           </div>

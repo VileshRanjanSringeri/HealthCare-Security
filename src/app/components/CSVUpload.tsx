@@ -10,8 +10,8 @@ import { Upload, FileText, AlertCircle, CheckCircle2, Loader2 } from 'lucide-rea
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Alert, AlertDescription } from './ui/alert';
-import { loadCSVFile, sampleRecords, NetworkFlowRecord } from '../utils/csvParser';
-import { transformToPatientData, calculateSecurityMetrics, generateAttackDistribution } from '../utils/dataTransformer';
+import { loadCSVFile, sampleRecords, NetworkFlowRecord, PatientHealthRecord } from '../utils/csvParser';
+import { transformToPatientData, transformPatientHealthRecords, calculateSecurityMetrics, generateAttackDistribution } from '../utils/dataTransformer';
 import { Patient, Alert as AlertType } from '../App';
 
 interface CSVUploadProps {
@@ -63,48 +63,85 @@ export function CSVUpload({ onDataLoaded, onClose }: CSVUploadProps) {
       // Parse CSV file
       console.log('📂 Loading CSV file...');
       const records = await loadCSVFile(file);
-      console.log(`✅ Loaded ${records.length} network flow records`);
+      console.log(`✅ Loaded ${records.length} records`);
 
       if (records.length === 0) {
         throw new Error('No valid records found in CSV file');
       }
 
-      // Sample records (50-100 patients)
-      const sampledRecords = sampleRecords(records, Math.min(patientCount * 2, 200)); // 2 flows per patient avg
-      console.log(`📊 Sampled ${sampledRecords.length} records for ${patientCount} patients`);
+      // Check if this is patient health data or network flow data
+      const isPatientHealthData = 'heartRate' in records[0];
 
-      // Calculate stats
-      const attackRecords = sampledRecords.filter(r => 
-        !r.label.toLowerCase().includes('benign') && 
-        !r.label.toLowerCase().includes('normal')
-      ).length;
-      const normalRecords = sampledRecords.length - attackRecords;
+      if (isPatientHealthData) {
+        // Patient Health Monitoring Data
+        console.log(`📊 Processing patient health data...`);
+        const healthRecords = records as PatientHealthRecord[];
+        
+        const { patients, alerts, securityMetrics, attackDistribution } = 
+          transformPatientHealthRecords(healthRecords, patientCount);
 
-      setStats({
-        totalRecords: records.length,
-        sampledRecords: sampledRecords.length,
-        attackRecords,
-        normalRecords,
-      });
+        console.log(`✅ Transformed ${patients.length} patients`);
+        console.log(`🚨 Generated ${alerts.length} alerts`);
 
-      // Transform to patient data
-      console.log('🔄 Transforming network data to patient records...');
-      const { patients, alerts, deviceMappings } = transformToPatientData(sampledRecords, patientCount);
-      console.log(`✅ Generated ${patients.length} patients with ${alerts.length} alerts`);
+        // Update stats
+        setStats({
+          totalRecords: healthRecords.length,
+          sampledRecords: patients.length,
+          attackRecords: alerts.length,
+          normalRecords: patients.filter(p => p.status === 'normal').length,
+        });
 
-      // Calculate security metrics
-      const securityMetrics = calculateSecurityMetrics(deviceMappings);
-      const attackDistribution = generateAttackDistribution(deviceMappings);
+        // Send transformed data to parent
+        onDataLoaded({
+          patients,
+          alerts,
+          securityMetrics,
+          attackDistribution,
+        });
 
-      // Pass data to parent
-      onDataLoaded({
-        patients,
-        alerts,
-        securityMetrics,
-        attackDistribution,
-      });
+        setSuccess(true);
+      } else {
+        // Network Flow Data (original format)
+        console.log(`📊 Processing network flow data...`);
+        const networkRecords = records as NetworkFlowRecord[];
 
-      setSuccess(true);
+        // Sample records (50-100 patients)
+        const sampledRecords = sampleRecords(networkRecords, Math.min(patientCount * 2, 200)); // 2 flows per patient avg
+        console.log(`📊 Sampled ${sampledRecords.length} records for ${patientCount} patients`);
+
+        // Calculate stats
+        const attackRecords = sampledRecords.filter(r => 
+          !r.label.toLowerCase().includes('benign') && 
+          !r.label.toLowerCase().includes('normal')
+        ).length;
+        const normalRecords = sampledRecords.length - attackRecords;
+
+        setStats({
+          totalRecords: networkRecords.length,
+          sampledRecords: sampledRecords.length,
+          attackRecords,
+          normalRecords,
+        });
+
+        // Transform to patient data
+        console.log('🔄 Transforming network data to patient records...');
+        const { patients, alerts, deviceMappings } = transformToPatientData(sampledRecords, patientCount);
+        console.log(`✅ Generated ${patients.length} patients with ${alerts.length} alerts`);
+
+        // Calculate security metrics
+        const securityMetrics = calculateSecurityMetrics(deviceMappings);
+        const attackDistribution = generateAttackDistribution(deviceMappings);
+
+        // Pass data to parent
+        onDataLoaded({
+          patients,
+          alerts,
+          securityMetrics,
+          attackDistribution,
+        });
+
+        setSuccess(true);
+      }
       
       // Auto-close after 2 seconds
       setTimeout(() => {
@@ -136,11 +173,17 @@ export function CSVUpload({ onDataLoaded, onClose }: CSVUploadProps) {
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
           <h3 className="font-semibold text-blue-900 mb-2">📋 Instructions</h3>
           <ul className="text-sm text-blue-800 space-y-1">
-            <li>• Download the CSV from Kaggle: <span className="font-mono text-xs">MedSec-25 IoMT Dataset</span></li>
-            <li>• Select the CSV file using the upload button below</li>
-            <li>• Choose number of patients to generate (50-100 recommended)</li>
-            <li>• Click "Process Dataset" to transform network data into patient records</li>
+            <li>• <strong>Convert Excel to CSV:</strong> File → Save As → CSV (Comma delimited)</li>
+            <li>• <strong>Required columns:</strong> patientId, heartRate, bodyTemp, oxygenSaturation, systolicBP, diastolicBP</li>
+            <li>• Select your CSV file using the upload button below</li>
+            <li>• Choose number of patients to generate (50 recommended for presentations)</li>
+            <li>• Click "Process Dataset" to load your data</li>
           </ul>
+          <div className="mt-3 p-2 bg-yellow-50 border border-yellow-200 rounded">
+            <p className="text-xs text-yellow-800">
+              💡 <strong>First time?</strong> See the DATASET_UPLOAD_GUIDE.md file in your project for detailed CSV format examples
+            </p>
+          </div>
         </div>
 
         {/* Patient Count Selector */}

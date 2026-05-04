@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Heart, Shield, Activity, Users, Bell, Settings, LogOut, TrendingUp } from 'lucide-react';
+import { Heart, Shield, Activity, AlertTriangle, Bell, Settings, LogOut } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { mockPatients, mockAlerts, generateVitalSignsHistory } from '../data/mockData';
-import { Alert } from '../App';
+import { Patient, Alert } from '../App';
+import { mockPatients } from '../data/mockData';
+import { formatTime12Hour, formatDate } from '../utils/timeFormat';
 
 interface MainDashboardProps {
   onViewPatient: (patientId: string) => void;
@@ -74,8 +75,8 @@ export default function MainDashboard({ onViewPatient, onShowAlert, onViewSecuri
           
           <div className="flex items-center gap-4">
             <div className="text-right">
-              <p className="text-sm text-[#717182]">{currentTime.toLocaleDateString()}</p>
-              <p className="text-sm font-mono">{currentTime.toLocaleTimeString()}</p>
+              <p className="text-sm text-[#717182]">{formatDate(currentTime)}</p>
+              <p className="text-sm font-mono">{formatTime12Hour(currentTime)}</p>
             </div>
             <button 
               className="relative p-2 rounded-lg hover:bg-accent transition-colors"

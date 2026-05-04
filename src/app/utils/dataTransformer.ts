@@ -5,7 +5,7 @@
  * Maps real cybersecurity data to synthetic patient identities
  */
 
-import { NetworkFlowRecord, PatientDeviceMapping, analyzeNetworkFlow } from './csvParser';
+import { NetworkFlowRecord, PatientDeviceMapping, PatientHealthRecord, analyzeNetworkFlow } from './csvParser';
 import { Patient, Alert } from '../App';
 
 // Synthetic patient name pool
@@ -335,4 +335,199 @@ export function generateAttackDistribution(deviceMappings: PatientDeviceMapping[
       value,
       color: colors[index % colors.length],
     }));
+}
+
+/**
+ * Transform PatientHealthRecords (from CSV) into Patient data
+ * This is for the new patient health monitoring dataset format
+ */
+export function transformPatientHealthRecords(
+  records: PatientHealthRecord[],
+  maxPatients: number = 50
+): { patients: Patient[]; alerts: Alert[]; securityMetrics: any; attackDistribution: any[] } {
+  
+  const patients: Patient[] = [];
+  const alerts: Alert[] = [];
+  
+  // Take a subset of patients
+  const selectedRecords = records.slice(0, Math.min(maxPatients, records.length));
+
+  selectedRecords.forEach((record, index) => {
+    const patientId = record.patientId || `P${String(index + 1).padStart(3, '0')}`;
+    const patientName = PATIENT_NAMES[index % PATIENT_NAMES.length];
+    const room = `${300 + index}`;
+    const deviceId = `IoT-Sensor-${generateDeviceId(index)}`;
+
+    // Determine status based on risk category and vital signs
+    let status: 'normal' | 'warning' | 'critical' = 'normal';
+    let aiStatus: 'normal' | 'anomaly' = 'normal';
+    let aiPattern: string | undefined = undefined;
+
+    // Analyze risk category
+    const riskLower = record.riskCategory.toLowerCase();
+    if (riskLower.includes('high') || riskLower.includes('critical')) {
+      status = 'critical';
+      aiStatus = 'anomaly';
+    } else if (riskLower.includes('medium') || riskLower.includes('warning') || riskLower.includes('moderate')) {
+      status = 'warning';
+    }
+
+    // Analyze vital signs for anomalies
+    const anomalies: string[] = [];
+    
+    // Heart rate analysis
+    if (record.heartRate < 50) {
+      anomalies.push('Potential Bradycardia Detected');
+      status = 'critical';
+      aiStatus = 'anomaly';
+    } else if (record.heartRate > 100) {
+      anomalies.push('Elevated Heart Rate');
+      if (status === 'normal') status = 'warning';
+    }
+
+    // Oxygen saturation analysis
+    if (record.oxygenSaturation < 90) {
+      anomalies.push('Low Oxygen Saturation Detected');
+      status = 'critical';
+      aiStatus = 'anomaly';
+    } else if (record.oxygenSaturation < 95) {
+      anomalies.push('Below Normal Oxygen Levels');
+      if (status === 'normal') status = 'warning';
+    }
+
+    // Blood pressure analysis
+    if (record.systolicBP > 140 || record.diastolicBP > 90) {
+      anomalies.push('Elevated Blood Pressure');
+      if (status === 'normal') status = 'warning';
+    } else if (record.systolicBP < 90 || record.diastolicBP < 60) {
+      anomalies.push('Low Blood Pressure');
+      if (status === 'normal') status = 'warning';
+    }
+
+    // Temperature analysis
+    if (record.bodyTemp > 38.0) {
+      anomalies.push('Fever Detected');
+      if (status === 'normal') status = 'warning';
+    } else if (record.bodyTemp < 36.0) {
+      anomalies.push('Hypothermia Risk');
+      if (status === 'normal') status = 'warning';
+    }
+
+    // Respiratory rate analysis
+    if (record.respiratoryRate < 12 || record.respiratoryRate > 20) {
+      anomalies.push('Abnormal Respiratory Rate');
+      if (status === 'normal') status = 'warning';
+    }
+
+    if (anomalies.length > 0) {
+      aiPattern = anomalies[0]; // Use first anomaly as primary pattern
+    }
+
+    // Calculate AI confidence based on data quality and risk
+    const confidence = 0.85 + Math.random() * 0.12; // 85-97% confidence
+
+    // Crypto verification (simulated - most devices verified)
+    const cryptoVerified = Math.random() > 0.05; // 95% verification rate
+    const signatureValid = cryptoVerified;
+
+    const patient: Patient = {
+      id: patientId,
+      name: patientName,
+      room,
+      status,
+      age: record.age,
+      weight: `${Math.round(record.weight)} kg`,
+      conditions: MEDICAL_CONDITIONS[index % MEDICAL_CONDITIONS.length],
+      medications: MEDICATIONS[index % MEDICATIONS.length],
+      doctor: DOCTORS[index % DOCTORS.length],
+      vitalSigns: {
+        heartRate: Math.round(record.heartRate),
+        bloodPressure: `${record.systolicBP}/${record.diastolicBP}`,
+        oxygen: Math.round(record.oxygenSaturation),
+        glucose: 90 + Math.floor(Math.random() * 40), // Glucose not in CSV, generate
+        temperature: Math.round(record.bodyTemp * 10) / 10,
+      },
+      aiAnalysis: {
+        status: aiStatus,
+        confidence: Math.round(confidence * 100) / 100,
+        pattern: aiPattern,
+      },
+      cryptoStatus: {
+        verified: cryptoVerified,
+        lastVerified: `${Math.floor(Math.random() * 5) + 1} seconds ago`,
+        sensorId: deviceId,
+        signatureValid,
+      },
+    };
+
+    patients.push(patient);
+
+    // Create alerts for critical/warning patients
+    if (status === 'critical' || (status === 'warning' && anomalies.length > 0 && Math.random() > 0.5)) {
+      const primaryAnomaly = anomalies[0] || 'Health Anomaly Detected';
+      const vitalSign = primaryAnomaly.includes('Heart') ? 'Heart Rate' :
+                       primaryAnomaly.includes('Oxygen') ? 'Oxygen Saturation' :
+                       primaryAnomaly.includes('Pressure') ? 'Blood Pressure' :
+                       primaryAnomaly.includes('Temperature') ? 'Temperature' :
+                       primaryAnomaly.includes('Respiratory') ? 'Respiratory Rate' : 'Vital Signs';
+      
+      const value = vitalSign === 'Heart Rate' ? `${Math.round(record.heartRate)} BPM` :
+                   vitalSign === 'Oxygen Saturation' ? `${Math.round(record.oxygenSaturation)}%` :
+                   vitalSign === 'Blood Pressure' ? `${record.systolicBP}/${record.diastolicBP}` :
+                   vitalSign === 'Temperature' ? `${record.bodyTemp.toFixed(1)}°C` :
+                   vitalSign === 'Respiratory Rate' ? `${Math.round(record.respiratoryRate)} breaths/min` :
+                   'Abnormal';
+
+      const normalRange = vitalSign === 'Heart Rate' ? '60-100 BPM' :
+                         vitalSign === 'Oxygen Saturation' ? '95-100%' :
+                         vitalSign === 'Blood Pressure' ? '90-120/60-80 mmHg' :
+                         vitalSign === 'Temperature' ? '36.0-37.5°C' :
+                         vitalSign === 'Respiratory Rate' ? '12-20 breaths/min' :
+                         'Normal';
+
+      alerts.push({
+        id: `alert-${patientId}`,
+        patientId,
+        patientName,
+        room,
+        type: primaryAnomaly,
+        severity: status === 'critical' ? 'critical' : 'warning',
+        vitalSign,
+        value,
+        normalRange,
+        timeDetected: formatTime(new Date()),
+        aiScore: confidence,
+        cryptoVerified,
+        acknowledged: Math.random() > 0.7, // 30% acknowledged
+      });
+    }
+  });
+
+  // Calculate security metrics
+  const normalPatients = patients.filter(p => p.status === 'normal').length;
+  const warningPatients = patients.filter(p => p.status === 'warning').length;
+  const criticalPatients = patients.filter(p => p.status === 'critical').length;
+
+  const securityMetrics = {
+    uptime: 99.5 + Math.random() * 0.4,
+    activeConnections: patients.length,
+    failedAuthAttempts: Math.floor(Math.random() * 5),
+    dataIntegrityRate: 98 + Math.random() * 2,
+    attacksDetected: Math.floor((warningPatients + criticalPatients) * 0.3),
+    hmacSuccessRate: 99.5 + Math.random() * 0.4,
+    digitalSignaturesIssued: patients.length * 120, // ~120 signatures per patient
+    aiAccuracy: 91 + Math.random() * 4,
+    falsePositiveRate: 3 + Math.random() * 3,
+    responseTime: 120 + Math.floor(Math.random() * 60),
+  };
+
+  // Generate attack distribution (simulated based on patient status)
+  const attackDistribution = [
+    { name: 'Data Tampering', value: Math.floor(criticalPatients * 1.5), color: '#C01C28' },
+    { name: 'Replay Attacks', value: Math.floor(warningPatients * 0.8), color: '#E5A50A' },
+    { name: 'Spoofing', value: Math.floor((criticalPatients + warningPatients) * 0.4), color: '#1A5FB4' },
+    { name: 'Other', value: Math.floor(Math.random() * 5), color: '#717182' },
+  ].filter(item => item.value > 0);
+
+  return { patients, alerts, securityMetrics, attackDistribution };
 }

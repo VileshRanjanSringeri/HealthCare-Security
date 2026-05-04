@@ -3,6 +3,12 @@
  * Handles login, logout, and session management
  */
 
+import { 
+  getCredentialsByUsername, 
+  saveCredentials, 
+  updateLastLogin
+} from './indexedDB';
+
 export interface User {
   username: string;
   role: 'admin' | 'doctor' | 'security_officer';
@@ -12,57 +18,189 @@ export interface User {
 export interface AuthCredentials {
   username: string;
   password: string;
-  twoFactorCode: string;
 }
 
-// Demo credentials (in production, this would be in a backend database)
-const VALID_CREDENTIALS = [
-  {
-    username: 'admin',
-    password: 'admin123',
-    twoFactorCode: '123456',
-    role: 'admin' as const,
-    fullName: 'Admin User',
-  },
-  {
-    username: 'doctor',
-    password: 'doctor123',
-    twoFactorCode: '654321',
-    role: 'doctor' as const,
-    fullName: 'Dr. Sarah Smith',
-  },
-  {
-    username: 'security',
-    password: 'security123',
-    twoFactorCode: '111111',
-    role: 'security_officer' as const,
-    fullName: 'Security Officer',
-  },
-];
+export interface FailedAuthAttempt {
+  timestamp: string;
+  username: string;
+  ip: string;
+  location: string;
+  status: string;
+  method: string;
+  reason: string;
+}
 
 const AUTH_TOKEN_KEY = 'healthcareDataSecurity_authToken';
 const USER_DATA_KEY = 'healthcareDataSecurity_userData';
+const FAILED_AUTH_KEY = 'healthcareDataSecurity_failedAuth';
+
+/**
+ * Get a simulated IP address (in production, this would come from the server)
+ */
+const getSimulatedIP = (): string => {
+  const ips = [
+    '192.168.1.105',
+    '10.0.0.88',
+    '172.16.0.55',
+    '203.0.113.45',
+    '198.51.100.23',
+  ];
+  return ips[Math.floor(Math.random() * ips.length)];
+};
+
+/**
+ * Determine the failure reason for logging (simplified)
+ */
+const getFailureReason = (_credentials: AuthCredentials): string => {
+  return 'Authentication Failed';
+};
+
+/**
+ * Log a failed authentication attempt
+ */
+export const logFailedAuthAttempt = (credentials: AuthCredentials): void => {
+  const now = new Date();
+  const timeString = now.toLocaleTimeString('en-US', { 
+    hour12: false, 
+    hour: '2-digit', 
+    minute: '2-digit', 
+    second: '2-digit' 
+  });
+
+  const failedAttempt: FailedAuthAttempt = {
+    timestamp: timeString,
+    username: credentials.username || '(empty)',
+    ip: getSimulatedIP(),
+    location: 'External Network',
+    status: 'Blocked',
+    method: 'Brute Force Attempt',
+    reason: getFailureReason(credentials),
+  };
+
+  // Get existing attempts
+  const existing = getFailedAuthAttempts();
+  
+  // Add new attempt at the beginning (most recent first)
+  const updated = [failedAttempt, ...existing];
+  
+  // Keep only last 50 attempts
+  const limited = updated.slice(0, 50);
+  
+  // Save to localStorage
+  localStorage.setItem(FAILED_AUTH_KEY, JSON.stringify(limited));
+};
+
+/**
+ * Get all failed authentication attempts
+ */
+export const getFailedAuthAttempts = (): FailedAuthAttempt[] => {
+  try {
+    const stored = localStorage.getItem(FAILED_AUTH_KEY);
+    if (!stored) return [];
+    return JSON.parse(stored);
+  } catch {
+    return [];
+  }
+};
+
+/**
+ * Clear all failed authentication attempts
+ */
+export const clearFailedAuthAttempts = (): void => {
+  localStorage.removeItem(FAILED_AUTH_KEY);
+};
+
+/**
+ * Register a new user into IndexedDB
+ */
+export const registerUser = async (data: {
+  username: string;
+  email: string;
+  password: string;
+  role: 'admin' | 'doctor' | 'security_officer';
+  fullName: string;
+}): Promise<{ success: boolean; error?: string }> => {
+  try {
+    await saveCredentials({
+      username: data.username,
+      email: data.email,
+      password: data.password,
+      role: data.role,
+      fullName: data.fullName,
+    });
+    return { success: true };
+  } catch (err: any) {
+    return { success: false, error: err?.message || 'Registration failed' };
+  }
+};
 
 /**
  * Validate login credentials
  */
-export const validateCredentials = (credentials: AuthCredentials): User | null => {
-  const validUser = VALID_CREDENTIALS.find(
-    (cred) =>
-      cred.username === credentials.username &&
-      cred.password === credentials.password &&
-      cred.twoFactorCode === credentials.twoFactorCode
-  );
+/**
+ * Initiate login by validating username/password
+ */
+export const login = async (credentials: AuthCredentials): Promise<{ success: boolean; user?: User; error?: string }> => {
+  try {
+    const stored = await getCredentialsByUsername(credentials.username);
+    if (!stored) {
+      logFailedAuthAttempt(credentials);
+      return { success: false, error: 'Invalid username or password' };
+    }
 
-  if (validUser) {
-    return {
-      username: validUser.username,
-      role: validUser.role,
-      fullName: validUser.fullName,
+    if (stored.password !== credentials.password) {
+      logFailedAuthAttempt(credentials);
+      return { success: false, error: 'Invalid username or password' };
+    }
+
+    const user: User = {
+      username: stored.username,
+      role: stored.role,
+      fullName: stored.fullName,
     };
-  }
 
-  return null;
+    const authToken = generateAuthToken(user.username);
+    localStorage.setItem(AUTH_TOKEN_KEY, authToken);
+    localStorage.setItem(USER_DATA_KEY, JSON.stringify(user));
+
+    await updateLastLogin(user.username);
+
+    return { success: true, user };
+  } catch (err: any) {
+    return { success: false, error: err?.message || 'Login failed' };
+  }
+};
+
+/**
+ * Ensure demo users exist in IndexedDB for testing/demo purposes
+ */
+export const ensureDemoUsersExist = async (): Promise<void> => {
+  try {
+    const admin = await getCredentialsByUsername('admin');
+    if (!admin) {
+      await saveCredentials({
+        username: 'admin',
+        email: 'vileshranjan@gmail.com',
+        password: 'admin123',
+        role: 'admin',
+        fullName: 'Admin User',
+      });
+    }
+
+    const doctor = await getCredentialsByUsername('doctor');
+    if (!doctor) {
+      await saveCredentials({
+        username: 'doctor',
+        email: 'doctor@example.com',
+        password: 'doctor123',
+        role: 'doctor',
+        fullName: 'Dr. Sarah Smith',
+      });
+    }
+  } catch (err) {
+    // ignore errors during demo seeding
+    console.warn('Demo user seeding failed', err);
+  }
 };
 
 /**
@@ -74,29 +212,7 @@ const generateAuthToken = (username: string): string => {
   return btoa(`${username}:${timestamp}:${randomStr}`);
 };
 
-/**
- * Login user and create session
- */
-export const login = (credentials: AuthCredentials): { success: boolean; user?: User; error?: string } => {
-  const user = validateCredentials(credentials);
-
-  if (!user) {
-    return {
-      success: false,
-      error: 'Invalid username, password, or 2FA code',
-    };
-  }
-
-  // Generate and store auth token
-  const authToken = generateAuthToken(user.username);
-  localStorage.setItem(AUTH_TOKEN_KEY, authToken);
-  localStorage.setItem(USER_DATA_KEY, JSON.stringify(user));
-
-  return {
-    success: true,
-    user,
-  };
-};
+// Note: Legacy synchronous login removed. Use async login() function.
 
 /**
  * Logout user and clear session

@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Shield, CheckCircle, AlertCircle } from 'lucide-react';
-import { login, emergencyOverride } from '../utils/auth';
+import { login, emergencyOverride, ensureDemoUsersExist } from '../utils/auth';
 
 interface LoginScreenProps {
   onLogin: () => void;
@@ -9,29 +9,30 @@ interface LoginScreenProps {
 export default function LoginScreen({ onLogin }: LoginScreenProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [twoFactorCode, setTwoFactorCode] = useState('');
   const [emergencyOverrideChecked, setEmergencyOverrideChecked] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    // Seed demo users for testing
+    ensureDemoUsersExist();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
+    
+    // Emergency override
+    if (emergencyOverrideChecked) {
+      emergencyOverride();
+      setLoading(false);
+      onLogin();
+      return;
+    }
 
-    // Simulate network delay
-    setTimeout(() => {
-      // Emergency override
-      if (emergencyOverrideChecked) {
-        emergencyOverride();
-        setLoading(false);
-        onLogin();
-        return;
-      }
-
-      // Normal login
-      const result = login({ username, password, twoFactorCode });
-
+    try {
+      const result = await login({ username, password });
       if (result.success) {
         setLoading(false);
         onLogin();
@@ -39,7 +40,10 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
         setError(result.error || 'Login failed');
         setLoading(false);
       }
-    }, 800);
+    } catch (err: any) {
+      setError(err?.message || 'Unexpected error');
+      setLoading(false);
+    }
   };
 
   return (
@@ -51,10 +55,10 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
             <Shield className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-white mb-1">
-            Healthcare Data
+            HealthCare-Security
           </h1>
           <h2 className="text-xl text-white/90">
-            Security System
+            IoMT Monitoring System
           </h2>
         </div>
 
@@ -94,20 +98,6 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium mb-2 text-[#1E1E1E]">2FA Code</label>
-            <input
-              type="text"
-              value={twoFactorCode}
-              onChange={(e) => setTwoFactorCode(e.target.value)}
-              placeholder="123456"
-              maxLength={6}
-              required
-              disabled={emergencyOverrideChecked}
-              className="w-full px-3 py-3 rounded-lg border border-[#E9EBEF] focus:border-[#1A5FB4] focus:ring-2 focus:ring-[#1A5FB4]/20 focus:outline-none font-mono text-center text-lg tracking-widest transition-all disabled:bg-[#F6F5F4] disabled:cursor-not-allowed"
-            />
-          </div>
-
           <div className="flex items-center gap-2 pt-2">
             <input
               type="checkbox"
@@ -136,6 +126,15 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
           >
             {loading ? 'Authenticating...' : 'Secure Login'}
           </button>
+
+          {/* Demo Credentials Help */}
+          <div className="mt-4 p-3 bg-[#F6F5F4] rounded-lg">
+            <p className="text-xs text-[#717182] font-semibold mb-2">Demo Credentials:</p>
+            <div className="space-y-1 text-xs text-[#717182]">
+              <p>• Username: <span className="font-mono">admin</span> | Password: <span className="font-mono">admin123</span></p>
+              <p>• Username: <span className="font-mono">doctor</span> | Password: <span className="font-mono">doctor123</span></p>
+            </div>
+          </div>
 
           {/* Demo Credentials Help */}
           <div className="mt-4 p-3 bg-[#F6F5F4] rounded-lg">

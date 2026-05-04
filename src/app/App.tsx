@@ -8,7 +8,7 @@ import ModelPerformanceDashboard from './components/ModelPerformanceDashboard';
 import AttackDemonstrationDashboard from './components/AttackDemonstrationDashboard';
 import { CSVUpload } from './components/CSVUpload';
 import { mockPatients, mockAlerts, securityMetrics as mockSecurityMetrics, attackTypeDistribution } from './data/mockData';
-import { isAuthenticated, logout as authLogout } from './utils/auth';
+import { isAuthenticated, logout as authLogout, getCurrentUser, User } from './utils/auth';
 
 export type Screen = 'login' | 'dashboard' | 'patient-detail' | 'alert' | 'security' | 'model-performance' | 'attack-demo' | 'csv-upload';
 
@@ -66,6 +66,7 @@ function App() {
   const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
   const [currentAlert, setCurrentAlert] = useState<Alert | null>(null);
   const [isAuthenticatedState, setIsAuthenticatedState] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   
   // State for loaded dataset
   const [patients, setPatients] = useState<Patient[]>(mockPatients);
@@ -74,11 +75,36 @@ function App() {
   const [attackDistribution, setAttackDistribution] = useState<any[]>(attackTypeDistribution);
   const [usingRealData, setUsingRealData] = useState(false);
 
+  // Scroll to top whenever screen changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentScreen]);
+
+  // Load persisted dataset from localStorage on mount
+  useEffect(() => {
+    try {
+      const savedData = localStorage.getItem('healthsec_dataset');
+      if (savedData) {
+        const data = JSON.parse(savedData);
+        setPatients(data.patients);
+        setAlerts(data.alerts);
+        setSecurityMetrics(data.securityMetrics);
+        setAttackDistribution(data.attackDistribution);
+        setUsingRealData(true);
+        console.log('✅ Loaded persisted dataset:', data.patients.length, 'patients');
+      }
+    } catch (error) {
+      console.error('Failed to load persisted dataset:', error);
+    }
+  }, []);
+
   // Check authentication on mount
   useEffect(() => {
     const authenticated = isAuthenticated();
     setIsAuthenticatedState(authenticated);
     if (authenticated) {
+      const user = getCurrentUser();
+      setCurrentUser(user);
       setCurrentScreen('dashboard');
     } else {
       setCurrentScreen('login');
@@ -86,6 +112,8 @@ function App() {
   }, []);
 
   const handleLogin = () => {
+    const user = getCurrentUser();
+    setCurrentUser(user);
     setIsAuthenticatedState(true);
     setCurrentScreen('dashboard');
   };
@@ -139,6 +167,15 @@ function App() {
     setSecurityMetrics(data.securityMetrics);
     setAttackDistribution(data.attackDistribution);
     setUsingRealData(true);
+    
+    // Persist to localStorage
+    try {
+      localStorage.setItem('healthsec_dataset', JSON.stringify(data));
+      console.log('✅ Dataset saved to localStorage');
+    } catch (error) {
+      console.error('Failed to save dataset to localStorage:', error);
+    }
+    
     setCurrentScreen('dashboard');
   };
   
@@ -148,6 +185,14 @@ function App() {
     setSecurityMetrics(mockSecurityMetrics);
     setAttackDistribution(attackTypeDistribution);
     setUsingRealData(false);
+    
+    // Clear localStorage
+    try {
+      localStorage.removeItem('healthsec_dataset');
+      console.log('✅ Dataset cleared from localStorage');
+    } catch (error) {
+      console.error('Failed to clear dataset from localStorage:', error);
+    }
   };
 
   return (
@@ -156,13 +201,14 @@ function App() {
         <LoginScreen onLogin={handleLogin} />
       )}
       
-      {currentScreen === 'dashboard' && (
+      {currentScreen === 'dashboard' && currentUser && (
         <EnhancedDashboard
           patients={patients}
           alerts={alerts}
           securityMetrics={securityMetrics}
           attackDistribution={attackDistribution}
           usingRealData={usingRealData}
+          userRole={currentUser.role}
           onViewPatient={handleViewPatient}
           onShowAlert={handleShowAlert}
           onViewSecurity={handleViewSecurity}
@@ -196,6 +242,7 @@ function App() {
           securityMetrics={securityMetrics}
           attackDistribution={attackDistribution}
           alerts={alerts}
+          totalPatients={patients.length}
           onBack={handleBackToDashboard}
         />
       )}

@@ -191,4 +191,281 @@
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
   }
+
+  /* Floating icon animations - UNIQUE for each icon to move independently */
+  
+  /* Original animations for the 3 cards at bottom */
+  @keyframes float-slow {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate(25px, -30px) rotate(20deg);
+    }
+    50% {
+      transform: translate(-20px, -50px) rotate(-15deg);
+    }
+    75% {
+      transform: translate(-30px, -25px) rotate(25deg);
+    }
+  }
+
+  @keyframes float-medium {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    33% {
+      transform: translate(-30px, -40px) rotate(-30deg);
+    }
+    66% {
+      transform: translate(35px, -30px) rotate(25deg);
+    }
+  }
+
+  @keyframes float-fast {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    20% {
+      transform: translate(20px, -25px) rotate(18deg);
+    }
+    40% {
+      transform: translate(-25px, -40px) rotate(-20deg);
+    }
+    60% {
+      transform: translate(30px, -20px) rotate(30deg);
+    }
+    80% {
+      transform: translate(-18px, -35px) rotate(-12deg);
+    }
+  }
+  
+  /* Animation 1 - For Header Icons */
+  @keyframes float-1 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(180px, -30px) rotate(120deg); }
+    66% { transform: translate(-120px, 40px) rotate(240deg); }
+  }
+  
+  /* Animation 2 */
+  @keyframes float-2 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-140px, 25px) rotate(90deg); }
+    50% { transform: translate(100px, -45px) rotate(180deg); }
+    75% { transform: translate(60px, 35px) rotate(270deg); }
+  }
+  
+  /* Animation 3 */
+  @keyframes float-3 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-200px, -20px) rotate(180deg); }
+  }
+  
+  /* Animation 4 */
+  @keyframes float-4 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    20% { transform: translate(90px, 50px) rotate(72deg); }
+    40% { transform: translate(-70px, -30px) rotate(144deg); }
+    60% { transform: translate(160px, 10px) rotate(216deg); }
+    80% { transform: translate(-110px, 45px) rotate(288deg); }
+  }
+  
+  /* Animation 5 */
+  @keyframes float-5 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(130px, 40px) rotate(135deg); }
+    66% { transform: translate(-90px, -50px) rotate(270deg); }
+  }
+  
+  /* Animation 6 */
+  @keyframes float-6 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-170px, -35px) rotate(80deg); }
+    50% { transform: translate(150px, 30px) rotate(160deg); }
+    75% { transform: translate(-50px, -40px) rotate(240deg); }
+  }
+  
+  /* Animation 7 */
+  @keyframes float-7 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(110px, -55px) rotate(200deg); }
+  }
+  
+  /* Animation 8 */
+  @keyframes float-8 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(-150px, 35px) rotate(110deg); }
+    66% { transform: translate(120px, -25px) rotate(250deg); }
+  }
+  
+  /* Animation 9 */
+  @keyframes float-9 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(80px, -40px) rotate(95deg); }
+    50% { transform: translate(-130px, 20px) rotate(185deg); }
+    75% { transform: translate(140px, 45px) rotate(275deg); }
+  }
+  
+  /* Animation 10 */
+  @keyframes float-10 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-180px, -45px) rotate(190deg); }
+  }
+  
+  /* Animation 11 */
+  @keyframes float-11 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    20% { transform: translate(170px, 30px) rotate(60deg); }
+    40% { transform: translate(-95px, -35px) rotate(150deg); }
+    60% { transform: translate(105px, 50px) rotate(230deg); }
+    80% { transform: translate(-140px, 15px) rotate(310deg); }
+  }
+  
+  /* Animation 12 */
+  @keyframes float-12 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(95px, -50px) rotate(140deg); }
+    66% { transform: translate(-160px, 25px) rotate(280deg); }
+  }
+  
+  /* Animation 13 */
+  @keyframes float-13 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-120px, -30px) rotate(85deg); }
+    50% { transform: translate(190px, 35px) rotate(170deg); }
+    75% { transform: translate(-80px, -50px) rotate(255deg); }
+  }
+  
+  /* Animation 14 */
+  @keyframes float-14 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(145px, 40px) rotate(195deg); }
+  }
+  
+  /* Animation 15 */
+  @keyframes float-15 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(-105px, 45px) rotate(125deg); }
+    66% { transform: translate(175px, -20px) rotate(245deg); }
+  }
+  
+  /* Animation 16 */
+  @keyframes float-16 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(125px, 25px) rotate(100deg); }
+    50% { transform: translate(-155px, -40px) rotate(200deg); }
+    75% { transform: translate(85px, 50px) rotate(300deg); }
+  }
+  
+  /* Animation 17 */
+  @keyframes float-17 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-135px, 30px) rotate(175deg); }
+  }
+  
+  /* Animation 18 */
+  @keyframes float-18 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    20% { transform: translate(155px, -45px) rotate(65deg); }
+    40% { transform: translate(-85px, 35px) rotate(155deg); }
+    60% { transform: translate(115px, -15px) rotate(235deg); }
+    80% { transform: translate(-165px, 50px) rotate(315deg); }
+  }
+  
+  /* Animation 19 */
+  @keyframes float-19 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(-125px, -50px) rotate(130deg); }
+    66% { transform: translate(135px, 20px) rotate(260deg); }
+  }
+  
+  /* Animation 20 */
+  @keyframes float-20 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(165px, 35px) rotate(75deg); }
+    50% { transform: translate(-145px, -25px) rotate(165deg); }
+    75% { transform: translate(95px, -55px) rotate(265deg); }
+  }
+  
+  /* Animation 21 */
+  @keyframes float-21 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(185px, -35px) rotate(185deg); }
+  }
+  
+  /* Animation 22 */
+  @keyframes float-22 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(-115px, 55px) rotate(115deg); }
+    66% { transform: translate(155px, -30px) rotate(235deg); }
+  }
+  
+  /* Animation 23 */
+  @keyframes float-23 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-175px, 20px) rotate(105deg); }
+    50% { transform: translate(105px, 45px) rotate(195deg); }
+    75% { transform: translate(-95px, -35px) rotate(285deg); }
+  }
+  
+  /* Animation 24 */
+  @keyframes float-24 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-125px, -40px) rotate(205deg); }
+  }
+  
+  /* Animation 25 */
+  @keyframes float-25 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    20% { transform: translate(135px, 50px) rotate(70deg); }
+    40% { transform: translate(-105px, -20px) rotate(160deg); }
+    60% { transform: translate(175px, 25px) rotate(240deg); }
+    80% { transform: translate(-85px, 40px) rotate(320deg); }
+  }
+  
+  /* Animation 26 */
+  @keyframes float-26 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(145px, -55px) rotate(145deg); }
+    66% { transform: translate(-135px, 30px) rotate(290deg); }
+  }
+  
+  /* Animation 27 */
+  @keyframes float-27 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-100px, 40px) rotate(110deg); }
+    50% { transform: translate(165px, -25px) rotate(210deg); }
+    75% { transform: translate(-155px, -50px) rotate(295deg); }
+  }
+  
+  /* Animation 28 */
+  @keyframes float-28 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(195px, 45px) rotate(215deg); }
+  }
+
+  .animate-float-slow {
+    animation: float-slow 12s ease-in-out infinite;
+  }
+
+  .animate-float-medium {
+    animation: float-medium 9s ease-in-out infinite;
+  }
+
+  .animate-float-fast {
+    animation: float-fast 7s ease-in-out infinite;
+  }
+
+  /* Utility classes for the 3 bottom dashboard cards - Using header-style animations */
+  .animate-card-float-1 {
+    animation: float-1 11s ease-in-out infinite;
+  }
+
+  .animate-card-float-2 {
+    animation: float-5 10s ease-in-out infinite;
+  }
+
+  .animate-card-float-3 {
+    animation: float-9 13s ease-in-out infinite;
+  }
 }

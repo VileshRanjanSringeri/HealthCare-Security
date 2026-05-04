@@ -4,8 +4,9 @@
  */
 
 import { useState, useEffect } from 'react';
-import { Siren, CheckCircle, RefreshCw, Clock } from 'lucide-react';
+import { AlertTriangle, Activity, Heart, ArrowLeft, CheckCircle, Clock, Shield, MapPin, User, Siren, RefreshCw } from 'lucide-react';
 import { Alert } from '../App';
+import { formatTime12Hour, formatDateShort } from '../utils/timeFormat';
 
 interface EmergencyAlertsCenterProps {
   alerts: Alert[];
@@ -80,15 +81,10 @@ export default function EmergencyAlertsCenter({
                 <p className="text-xs text-[#717182]">Real-time Updates</p>
               </div>
               <p className="text-lg font-mono font-semibold text-[#1E1E1E]">
-                {currentTime.toLocaleTimeString('en-US', { hour12: false })}
+                {formatTime12Hour(currentTime)}
               </p>
               <p className="text-xs text-[#717182]">
-                {currentTime.toLocaleDateString('en-US', { 
-                  weekday: 'short', 
-                  month: 'short', 
-                  day: 'numeric',
-                  year: 'numeric'
-                })}
+                {formatDateShort(currentTime)}
               </p>
             </div>
           </div>

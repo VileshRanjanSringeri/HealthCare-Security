@@ -1,12 +1,32 @@
 /**
  * CSV Parser for MedSec-25 IoMT Cybersecurity Dataset
  * 
- * This utility parses the Kaggle IoMT network traffic dataset and transforms it
+ * This utility parses the Kaggle IoMT patient health monitoring dataset and transforms it
  * into patient-centric security monitoring data for the dashboard.
  * 
- * Dataset: MedSec-25 IoMT Cybersecurity Dataset
- * Source: Kaggle (Network traffic analysis for IoMT devices)
+ * Dataset: MedSec-25 IoMT Cybersecurity Dataset (Patient Health Monitoring)
+ * Source: Kaggle (Patient vital signs with IoT device data)
  */
+
+export interface PatientHealthRecord {
+  patientId: string;
+  heartRate: number;
+  respiratoryRate: number;
+  timestamp: string;
+  bodyTemp: number;
+  oxygenSaturation: number;
+  systolicBP: number;
+  diastolicBP: number;
+  age: number;
+  gender: string;
+  weight: number;
+  height: number;
+  derivedH: number;
+  derivedP: number;
+  derivedB: number;
+  derivedM: number;
+  riskCategory: string;
+}
 
 export interface NetworkFlowRecord {
   flowId: string;
@@ -58,9 +78,85 @@ export interface PatientDeviceMapping {
 }
 
 /**
- * Parse CSV text into structured network flow records
+ * Parse CSV text into patient health records (NEW FORMAT)
+ */
+export function parsePatientHealthCSV(csvText: string): PatientHealthRecord[] {
+  const lines = csvText.trim().split('\n');
+  if (lines.length < 2) {
+    throw new Error('CSV file is empty or invalid');
+  }
+
+  const headers = lines[0].split(',').map(h => h.trim());
+  const records: PatientHealthRecord[] = [];
+
+  // Map column indices for patient health data
+  const colMap = {
+    patientId: headers.findIndex(h => h.toLowerCase().includes('patient') && h.toLowerCase().includes('id')),
+    heartRate: headers.findIndex(h => h.toLowerCase().includes('heart') && h.toLowerCase().includes('rate')),
+    respiratoryRate: headers.findIndex(h => h.toLowerCase().includes('respirat')),
+    timestamp: headers.findIndex(h => h.toLowerCase().includes('timestamp')),
+    bodyTemp: headers.findIndex(h => h.toLowerCase().includes('body') && h.toLowerCase().includes('temp')),
+    oxygenSaturation: headers.findIndex(h => h.toLowerCase().includes('oxygen')),
+    systolicBP: headers.findIndex(h => h.toLowerCase().includes('systolic')),
+    diastolicBP: headers.findIndex(h => h.toLowerCase().includes('diastolic')),
+    age: headers.findIndex(h => h.toLowerCase() === 'age'),
+    gender: headers.findIndex(h => h.toLowerCase().includes('gender')),
+    weight: headers.findIndex(h => h.toLowerCase().includes('weight')),
+    height: headers.findIndex(h => h.toLowerCase().includes('height')),
+    derivedH: headers.findIndex(h => h.toLowerCase().includes('derived_h')),
+    derivedP: headers.findIndex(h => h.toLowerCase().includes('derived_p')),
+    derivedB: headers.findIndex(h => h.toLowerCase().includes('derived_b')),
+    derivedM: headers.findIndex(h => h.toLowerCase().includes('derived_m')),
+    riskCategory: headers.findIndex(h => h.toLowerCase().includes('risk')),
+  };
+
+  // Parse data rows
+  for (let i = 1; i < lines.length; i++) {
+    const values = lines[i].split(',').map(v => v.trim());
+    
+    if (values.length < 5) continue; // Skip invalid rows
+
+    try {
+      const record: PatientHealthRecord = {
+        patientId: getValue(values, colMap.patientId, `P${String(i).padStart(3, '0')}`),
+        heartRate: parseFloat(getValue(values, colMap.heartRate, '70')),
+        respiratoryRate: parseFloat(getValue(values, colMap.respiratoryRate, '16')),
+        timestamp: getValue(values, colMap.timestamp, new Date().toISOString()),
+        bodyTemp: parseFloat(getValue(values, colMap.bodyTemp, '37.0')),
+        oxygenSaturation: parseFloat(getValue(values, colMap.oxygenSaturation, '98')),
+        systolicBP: parseInt(getValue(values, colMap.systolicBP, '120')),
+        diastolicBP: parseInt(getValue(values, colMap.diastolicBP, '80')),
+        age: parseInt(getValue(values, colMap.age, '50')),
+        gender: getValue(values, colMap.gender, 'Unknown'),
+        weight: parseFloat(getValue(values, colMap.weight, '70')),
+        height: parseFloat(getValue(values, colMap.height, '1.7')),
+        derivedH: parseFloat(getValue(values, colMap.derivedH, '0')),
+        derivedP: parseFloat(getValue(values, colMap.derivedP, '0')),
+        derivedB: parseFloat(getValue(values, colMap.derivedB, '0')),
+        derivedM: parseFloat(getValue(values, colMap.derivedM, '0')),
+        riskCategory: getValue(values, colMap.riskCategory, 'Normal'),
+      };
+
+      records.push(record);
+    } catch (error) {
+      console.warn(`Skipping row ${i}: Invalid data`);
+    }
+  }
+
+  return records;
+}
+
+/**
+ * Parse CSV text into structured network flow records (OLD FORMAT - kept for compatibility)
  */
 export function parseCSV(csvText: string): NetworkFlowRecord[] {
+  // First try to detect if this is patient health data
+  const firstLine = csvText.split('\n')[0].toLowerCase();
+  if (firstLine.includes('heart rate') || firstLine.includes('oxygen') || firstLine.includes('body temp')) {
+    // This is patient health data, not network flow data
+    throw new Error('PATIENT_HEALTH_DATA');
+  }
+
   const lines = csvText.trim().split('\n');
   if (lines.length < 2) {
     throw new Error('CSV file is empty or invalid');
@@ -150,17 +246,27 @@ function getValue(values: string[], index: number, defaultValue: string): string
 }
 
 /**
- * Load and parse CSV file from user input
+ * Load and parse CSV file from user input (detects format automatically)
  */
-export async function loadCSVFile(file: File): Promise<NetworkFlowRecord[]> {
+export async function loadCSVFile(file: File): Promise<PatientHealthRecord[] | NetworkFlowRecord[]> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     
     reader.onload = (e) => {
       try {
         const csvText = e.target?.result as string;
-        const records = parseCSV(csvText);
-        resolve(records);
+        
+        // Auto-detect format
+        const firstLine = csvText.split('\n')[0].toLowerCase();
+        if (firstLine.includes('heart rate') || firstLine.includes('oxygen') || firstLine.includes('body temp')) {
+          // Patient health monitoring data
+          const records = parsePatientHealthCSV(csvText);
+          resolve(records);
+        } else {
+          // Network flow data
+          const records = parseCSV(csvText);
+          resolve(records);
+        }
       } catch (error) {
         reject(error);
       }
