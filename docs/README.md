@@ -16,7 +16,16 @@ This project is a full-stack healthcare security system designed to protect sens
 - Data Handling: CSV, JSON
 - Security: Authentication, Encryption, RBAC
 
-## How to Run
-```bash
-npm install
-npm run dev
+## Screenshots
+
+### Login & Authentication
+![Login](assets/login.png)
+
+### Patient Dashboard
+![Dashboard](assets/dashboard.png)
+
+### Security Analytics
+![Security](assets/security-analytics.png)
+
+### Alerts System
+![Alerts](assets/alerts.png)
