@@ -25,5 +25,5 @@ This project is a full-stack healthcare security system designed to protect sens
 ![Security](assets/security-analytics.png)
 
 ### Features
-![Login](assets/features.png)
+![Features](assets/features.png)
 
