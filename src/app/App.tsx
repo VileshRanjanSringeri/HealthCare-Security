@@ -8,7 +8,7 @@ import ModelPerformanceDashboard from './components/ModelPerformanceDashboard';
 import AttackDemonstrationDashboard from './components/AttackDemonstrationDashboard';
 import { CSVUpload } from './components/CSVUpload';
 import { mockPatients, mockAlerts, securityMetrics as mockSecurityMetrics, attackTypeDistribution } from './data/mockData';
-import { isAuthenticated, logout as authLogout, getCurrentUser, User } from './utils/auth';
+import { isAuthenticated, logout as authLogout, getCurrentUser, validateUserInDatabase, User } from './utils/auth';
 
 export type Screen = 'login' | 'dashboard' | 'patient-detail' | 'alert' | 'security' | 'model-performance' | 'attack-demo' | 'csv-upload';
 
@@ -100,15 +100,61 @@ function App() {
 
   // Check authentication on mount
   useEffect(() => {
-    const authenticated = isAuthenticated();
-    setIsAuthenticatedState(authenticated);
-    if (authenticated) {
+    const checkAuth = async () => {
+      // DEBUG: Force clear auth to test
+      console.log('🔍 App startup - checking authentication...');
+      
+      const authenticated = isAuthenticated();
       const user = getCurrentUser();
-      setCurrentUser(user);
-      setCurrentScreen('dashboard');
-    } else {
-      setCurrentScreen('login');
-    }
+      
+      console.log('📌 Authentication check:', { authenticated, userExists: !!user, username: user?.username });
+      
+      // Validate that both token and user data exist
+      if (authenticated && user) {
+        // Emergency override is not a real user - always clear it
+        if (user.username === 'emergency_override') {
+          console.log('🔑 Emergency override detected - clearing');
+          authLogout();
+          setIsAuthenticatedState(false);
+          setCurrentUser(null);
+          setCurrentScreen('login');
+          return;
+        }
+        
+        // Verify user still exists in IndexedDB
+        try {
+          console.log('🔍 Validating user in database:', user.username);
+          const userExists = await validateUserInDatabase(user.username);
+          console.log('✅ Validation result:', userExists);
+          
+          if (userExists) {
+            setIsAuthenticatedState(true);
+            setCurrentUser(user);
+            setCurrentScreen('dashboard');
+          } else {
+            console.log('❌ User not found in DB - clearing auth');
+            authLogout();
+            setIsAuthenticatedState(false);
+            setCurrentUser(null);
+            setCurrentScreen('login');
+          }
+        } catch (err) {
+          console.error('❌ Auth validation error:', err);
+          authLogout();
+          setIsAuthenticatedState(false);
+          setCurrentUser(null);
+          setCurrentScreen('login');
+        }
+      } else {
+        console.log('❌ No authentication data - showing login');
+        authLogout();
+        setIsAuthenticatedState(false);
+        setCurrentUser(null);
+        setCurrentScreen('login');
+      }
+    };
+    
+    checkAuth();
   }, []);
 
   const handleLogin = () => {

@@ -245,6 +245,19 @@ export const getCurrentUser = (): User | null => {
 };
 
 /**
+ * Validate user credentials exist in IndexedDB
+ * Ensures stored auth data hasn't become stale
+ */
+export const validateUserInDatabase = async (username: string): Promise<boolean> => {
+  try {
+    const credentials = await getCredentialsByUsername(username);
+    return credentials !== null;
+  } catch {
+    return false;
+  }
+};
+
+/**
  * Emergency override (bypasses normal authentication)
  * Used for critical situations - logs the override
  */
