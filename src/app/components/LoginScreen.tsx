@@ -57,9 +57,6 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
           <h1 className="text-3xl font-bold text-white mb-1">
             HealthCare-Security
           </h1>
-          <h2 className="text-xl text-white/90">
-            IoMT Monitoring System
-          </h2>
         </div>
 
         {/* Login Form Card */}
