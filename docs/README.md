@@ -18,8 +18,12 @@ This project is a full-stack healthcare security system designed to protect sens
 
 ## Screenshots
 
+Login 
+### 🔐 Login Interface- 
+![Login](https://raw.githubusercontent.com/VileshRanjanSringeri/HealthCare-Security/main/assets/login.png)
+### Dashboard 
 ![Dashboard](https://raw.githubusercontent.com/VileshRanjanSringeri/HealthCare-Security/main/assets/dashboard.png)
-
+### Analytics-
 ![Security](https://raw.githubusercontent.com/VileshRanjanSringeri/HealthCare-Security/main/assets/security-analytics.png)
-
+### Features-
 ![Features](https://raw.githubusercontent.com/VileshRanjanSringeri/HealthCare-Security/main/assets/features.png)
