@@ -24,7 +24,7 @@ Login
 ### Dashboard 
 ![Dashboard](https://raw.githubusercontent.com/VileshRanjanSringeri/HealthCare-Security/main/assets/dashboard.png)
 ### Model
-![Login](assets/login.png)
+![Model](assets/model.png)
 ### Analytics-
 ![Security](https://raw.githubusercontent.com/VileshRanjanSringeri/HealthCare-Security/main/assets/security-analytics.png)
 ### Features-
